@@ -1,0 +1,75 @@
+name: Swift
+
+on: [push]
+
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+  GITHUB_SHA: ${{ github.sha }}
+  IMAGE: blog
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: swift run
+    - name: Copy Dockerfile
+      run: mv Dockerfile Output
+    - name: Upload Output for upload
+      uses: actions/upload-artifact@v1
+      with:
+        name: output
+        path: Output
+  upload:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Download math result for job 2
+      uses: actions/download-artifact@v1
+      with:
+        name: output
+        path: Output
+    # Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_email: ${{ secrets.GKE_EMAIL }}
+        service_account_key: ${{ secrets.GKE_KEY }}
+
+    # Configure docker to use the gcloud command-line tool as a credential helper
+    - run: |
+        # Set up docker to authenticate
+        # via gcloud command-line tool.
+        gcloud auth configure-docker
+      
+    # Build the Docker image
+    - name: Build
+      run: |
+        docker build -t eu.gcr.io/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
+          --build-arg=env=production \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" Output
+
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |
+        docker push eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+        docker tag eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA eu.gcr.io/$GKE_PROJECT/$IMAGE:latest
+        docker push eu.gcr.io/$GKE_PROJECT/$IMAGE:latest
+
+  update:
+    runs-on: ubuntu-latest
+    needs: upload
+    steps:
+    - name: SSH Commands
+      uses: appleboy/ssh-action@v0.0.6
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        debug: true
+        envs: GKE_PROJECT,IMAGE,GITHUB_SHA
+        script: kubectl set image deployment/blog blog=eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA

@@ -25,7 +25,11 @@ struct Pocpublish: Website {
 // This will generate your website using the built-in Foundation theme:
 try Pocpublish().publish(
     withTheme: .foundation2,
-    additionalSteps: [
-        .installPlugin(.splash(withClassPrefix: "swift"))
-    ]
+    indentation: .tabs(1),
+    at: nil,
+    rssFeedSections: .init(),
+    rssFeedConfig: nil,
+    deployedUsing: nil,
+    additionalSteps: [],
+    plugins: [.splash(withClassPrefix: "")]
 )

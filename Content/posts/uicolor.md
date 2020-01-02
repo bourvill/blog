@@ -27,16 +27,16 @@ extension UIColor {
 }
 ```
 
-In this part of code, we have created a “convenience” initializer
+In this part of code, we have created a “*convenience*” initializer  
 
-> Convenience initializers are also aptly named, and they are initializers used to make initialization a bit easier. 
-> Designated initializers tend to set all of the properties up and let the user send in values for each. A convenience initializer often has some of those hard coded, and thus can take less parameters. 
->The developer usually write’s a convenience initializer to set some defaults that are appropriate to a special use case.
+*Convenience initializers are also aptly named, and they are initializers used to make initialization a bit easier.* 
+*Designated initializers tend to set all of the properties up and let the user send in values for each. A convenience initializer often has some of those hard coded, and thus can take less parameters.* 
+*The developer usually write’s a convenience initializer to set some defaults that are appropriate to a special use case.*
 
-And we use a “assert” keyword
 
-> Assert is first shot I came along for asserts. 
-> As expected, assert() is evaluated only in debug mode (this is the general rule for asserts in programming languages).
+And we use a “*assert*” keyword
+*Assert is first shot I came along for asserts.* 
+*As expected, assert() is evaluated only in debug mode (this is the general rule for asserts in programming languages).*
 
 Now you can use in your code like this:
 

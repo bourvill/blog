@@ -1,0 +1,153 @@
+---
+date: 2018-01-23 17:11
+description: Machine learning your first object detection!
+tags: ml
+---
+# Machine learning your first object detection
+
+## Today we talk about machine learning.
+
+Apple was recently introduced CoreML. CoreML was build to work with a trained model and can be used easily in mobile App. But how to create this model?
+
+Apple released a few weeks ago, Turicreate, an open source framework to create easily model for CoreML.
+
+Machine learning can be used for recommendations, object detection, image classification, image similarity or activity classify for example.
+
+## The goal of this tutorial
+In this tutorial we will learn how to create an object detection script. We will train the model to find the head of a cat 🐱 . At the end, by giving an image containing a cat 🐈 this one would give us the position with a prediction confidence.
+
+## Object detection
+Object detection is the task of simultaneously classifying and localizing object instances in an image.
+
+## Coding!
+### First step Install Turi
+All steps are released on Mac. But you can try on Ubuntu for example.
+
+To train your model Turi requires python, we use pip and virtualenv for this. 
+
+Open terminal and run
+
+```
+sudo easy_install pip 
+sudo pip install virtualenv
+```
+
+Now, create new place for this amazing project 😸
+
+```
+mkdir theevilcat
+cd theevilcat
+```
+
+Create the virtualenv
+
+```
+virtualenv venv
+source venv/bin/activate
+```
+
+You are now in your virtualenv
+
+### Let's install turicreate
+
+```
+pip install -U turicreate
+```
+
+## Second part? Coding!
+
+First, download images, cat.zip and unzip in the root folder of project, this is your image database. 
+
+https://www.dropbox.com/sh/rgm8cfsyhvgw1xg/AACsdIgrM05oj4uMAhsAv9Pfa?dl=0
+
+Your first machine learning script. We define "annotation",
+Annotation require label and position of object, where height and width are simple size bound, and x and y are the center of your rectangle
+
+![ml-first-obj-detection](https://maxime.marinel.me/img/ml-first-obj-detection/ball.png)
+
+
+Now create file build.py
+
+```
+#First include module turicreate
+import turicreate as tc
+#Define where the cat can be found in image
+annotations = tc.SArray([
+ [
+  {'label': 'cat', 'coordinates': {'height': 1287, 'width': 1226, 'x': 1561, 'y': 1952}}
+ ],
+ [
+  {'label': 'cat', 'coordinates': {'height': 2049, 'width': 2077, 'x': 2212, 'y': 1379}}
+ ],
+ [
+  {'label': 'cat', 'coordinates': {'height': 1871, 'width': 1892, 'x': 1890, 'y': 1121}}
+ ],
+ [
+  {'label': 'cat', 'coordinates': {'height': 1344, 'width': 1427, 'x': 2601, 'y': 814}}
+ ],
+ [
+  {'label': 'cat', 'coordinates': {'height': 2716, 'width': 2728, 'x': 4429, 'y': 1802}}
+ ]
+])
+#load images
+images = tc.SArray([
+ tc.Image('cat1.jpg'),
+ tc.Image('cat2.jpg'),
+ tc.Image('cat3.jpg'),
+ tc.Image('cat4.jpg'),
+ tc.Image('cat5.jpg')
+])
+#merge images and annotations
+data = tc.SFrame({'image': images, 'annotations': annotations})
+# this part work only on Mac.
+#data['image_with_ground_truth'] = \
+#    tc.object_detector.util.draw_bounding_boxes(data['image'], #data['annotations'])
+#data.explore()
+train_data, test_data = data.random_split(0.8)
+# Create a model
+model = tc.object_detector.create(train_data, max_iterations=1000)
+# Save predictions to an SArray
+predictions = model.predict(test_data)
+# Evaluate the model and save the results into a dictionary
+metrics = model.evaluate(test_data)
+# Save the model for later use in Turi Create
+model.save('mymodel.model')
+# Export for use in Core ML
+model.export_coreml('MyCustomObjectDetector.mlmodel')
+``` 
+
+Now you can build your model, but this part really took a while . you can take ☕️ this part is really longer… really long… It took 20h on my mbp 😴😴😴
+
+This step can be reduced if you using Cuda with Nvida GPU
+
+```
+python build.py
+```
+
+You can reduce the building time with smaller max_iterations, but the accuracy will be reduced!!!
+
+After this build, you get your first trained model, and CoreML format.
+If you want to skip this long building part, you can download model from dropbox
+
+## Try your dataset
+
+Now, we write a first test script for your trained model
+Download test.jpg in root folder of project https://www.dropbox.com/sh/rgm8cfsyhvgw1xg/AACsdIgrM05oj4uMAhsAv9Pfa?dl=0
+
+```
+import turicreate as tc
+#load image 
+test = tc.SFrame({'image': [tc.Image('test.jpg')]})
+#load the model
+model = tc.load_model('mymodel.model')
+test['predictions'] = model.predict(test)
+print(test['predictions'])
+#this part work only on Mac
+#test['image_with_predictions'] = \
+#    tc.object_detector.util.draw_bounding_boxes(test['image'], #test['predictions'])
+#test.explore()
+```
+
+Normally the script returns the coordinates where the cat will be found in image with the confidence.
+
+That's fun and easy isn't it?

@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/johnsundell/files.git",
         "state": {
           "branch": null,
-          "revision": "6568bfe636f02dfd85dc9d51b3782555b83080d3",
-          "version": "4.0.2"
+          "revision": "22fe84797d499ffca911ccd896b34efaf06a50b9",
+          "version": "4.1.1"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/johnsundell/plot.git",
         "state": {
           "branch": null,
-          "revision": "2e5574972f83bc5cdea59662986e701b86137642",
-          "version": "0.3.0"
+          "revision": "ccabb2674ca0d9ccfabd5e7c0c44c6cca6c827fb",
+          "version": "0.5.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/johnsundell/publish.git",
         "state": {
           "branch": null,
-          "revision": "ef3cd95bc4b4307c516b7538c6c2dfcc943fc7a8",
-          "version": "0.1.0"
+          "revision": "c1bde99ec71f992cbe7dec6310759b14258567a8",
+          "version": "0.3.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/johnsundell/shellout.git",
         "state": {
           "branch": null,
-          "revision": "4ebf25863deb9c3c02696704fc3d39736183f258",
-          "version": "2.2.1"
+          "revision": "e1577acf2b6e90086d01a6d5e2b8efdaae033568",
+          "version": "2.3.0"
         }
       },
       {
