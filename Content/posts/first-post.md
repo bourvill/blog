@@ -1,0 +1,63 @@
+---
+date: 2017-12-31 17:11
+description: UIColor : Quick tips and color your Life!
+tags: swift
+---
+# UIColor : Quick tips and color your Life!
+
+Before start, we need to create an extension, it’s simple.
+Create a new file with this:
+
+```
+extension UIColor {
+}
+```
+
+## UIColor with Int for RGB color
+Now we can create an initializer for UIColor and to be able to handle Int value
+
+```swift
+extension UIColor {
+     convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red")
+        assert(green >= 0 && green <= 255, "Invalid green")
+        assert(blue >= 0 && blue <= 255, "Invalid blue")
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+}
+```
+
+In this part of code, we have created a “convenience” initializer
+
+> Convenience initializers are also aptly named, and they are initializers used to make initialization a bit easier. 
+> Designated initializers tend to set all of the properties up and let the user send in values for each. A convenience initializer often has some of those hard coded, and thus can take less parameters. 
+>The developer usually write’s a convenience initializer to set some defaults that are appropriate to a special use case.
+
+And we use a “assert” keyword
+
+> Assert is first shot I came along for asserts. 
+> As expected, assert() is evaluated only in debug mode (this is the general rule for asserts in programming languages).
+
+Now you can use in your code like this:
+
+```
+let color = UIColor(red: 100, green: 50, blue: 50)
+```
+
+## UIColor from hex
+Now add an initializer for UIColor and to be able to handle Hexa value
+```
+extension UIColor {
+    convenience init(hex:Int) {
+        self.init(red:(hex >> 16) & 0xff, green:(hex >> 8) & 0xff, blue:hex & 0xff)
+    }
+}
+```
+
+and use like this:
+
+```
+let red = UIColor(hex: 0xFF0000)
+```
+
+Enjoy! And now color your life !
