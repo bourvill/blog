@@ -27,8 +27,8 @@ try Pocpublish().publish(
     withTheme: .foundation2,
     indentation: .tabs(1),
     at: nil,
-    rssFeedSections: .init(),
-    rssFeedConfig: nil,
+    rssFeedSections: Set(Pocpublish.SectionID.allCases),
+    rssFeedConfig: .default,
     deployedUsing: nil,
     additionalSteps: [],
     plugins: [.splash(withClassPrefix: "")]
