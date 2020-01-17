@@ -1,7 +1,7 @@
 ---
 date: 2018-03-01 17:11
 description: Let's discover serveless together
-tags: serverless aws
+tags: serverless, aws
 ---
 # Let's discover serverless together
 I like discovering new things, and I think is a big part of my job, I have to experiment with new technologies in order to be up to date.
