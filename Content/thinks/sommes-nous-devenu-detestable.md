@@ -11,31 +11,31 @@ Une experience du weekend a fait écho, et je vais vous la raconter car je pense
 
 ## Excuser l’autre 
 
-Mes courses finis me voila à passer en caisse, un soucis avec ma carte de fidélité me fait aller en direction du service en magasin pour gérer ma carte.
+Mes courses terminées me voilà à passer en caisse, un souci avec ma carte de fidélité me fait aller en direction du service en magasin pour gérer ma carte.
 
-Nous voila installé devant la personne en charge des cartes de fidélité, une personne d’une quarantaine d’année, plutôt alaise avec son outil informatique, elle ne me connait pas et ne connait pas mon metier.
+Me voilà installé devant la personne en charge des cartes, une personne d’une quarantaine d’année, plutôt alaise avec son outil informatique, elle ne me connaît pas et ne connaît pas mon métier.
+
 
 Elle pianote, clic, c’est lent, c’est long, et voila le premier argument qui tombe: 
 
 « Je suis désolé mon outil est lent mais ne vous inquiétiez pas, on va trouver une solution à votre problème »
 
-Un problème de réseau? Un Pc lent? Un site non optimisé…? Peut être en tout cas la voila à devoir s’excuser pour des choses qu’elle ne maitrise pas… 
+Un problème du réseau? Un PC lent? Un site non optimisé…? Peut-être en tout cas la voilà à devoir s’excuser pour des choses qu’elle ne maîtrise pas… 
 
 ## A vous savez Le service informatique !
 
-On avance dans la démarche pour régulariser ma carte de fidélité, les clics s’enchaînent, les petites notes sur un papier devant elle pour ouvrir une autre page avec des id et je peux m’empêcher de lui dire, vous en avez des clics à faire et des opérations à faire pour régulariser la carte.
+On avance dans la démarche pour régulariser ma carte, les clics s’enchaînent, les petites notes sur un papier devant elle pour ouvrir une autre page avec des id et je peux m’empêcher de lui dire, vous en avez des clics à faire et des opérations à faire pour régulariser la carte.
 
-Sa réponse :
 
-« Oh si vous saviez, on l’a dit… Mais vous savez on peut rien leur dire à l’informatique… » 
+« Oh si vous saviez, on l’a dit… Mais vous savez on ne peut rien leur dire à l’informatique… » 
 
-Et la je me retrouve petit sur mon fauteuil… 
-Car je le sais nous sommes généralement exécrable devant le retour de nos utilisateurs… « Il a encore rien compris », « Le problème est entre le chaise et la clavier… »…
+Et là je me retrouve petit sur mon fauteuil… 
+Car je le sais nous sommes généralement exécrables devant le retour de nos utilisateurs… « Il a encore rien compris », « Le problème est entre la chaise et le clavier… »…
 
-Toutes ces petites phrases qui finalement nous rendent detestable.
+Toutes ces petites phrases qui finalement nous rendent détestable.
 
-J’ai toujours eu tendance a essayer de fuir l’image du geek, de l’homme des cavernes coincé devant son écran. 
+J’ai toujours eu tendance à essayer de fuir l’image du geek...
 
-Mais finalement nous avons une autre image… Celle d’être hautain, imbu, a qui on ne peut rien dire…
+Mais finalement cette image n'est pas la pire... Nous avons une autre image… Celle d’être hautain, imbut, à qui maintenant on ne peut plus rien dire…
 
 Ca me donne à réfléchir car je pense qu’elle a raison, nous sommes des princesses à qui on ne peut plus rien dire… 
