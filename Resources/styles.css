@@ -51,6 +51,12 @@ nav {
 
 nav li {
     display: inline-block;
+    margin: 0 7px;
+    line-height: 1.5em;
+}
+
+nav li a.selected {
+    text-decoration: underline;
 }
 
 h1 {
@@ -77,9 +83,13 @@ a {
 .item-list > li {
     display: block;
     padding: 20px;
-    margin-bottom: 10px;
     border-radius: 20px;
     background-color: #eee;
+    margin-bottom: 20px;
+}
+
+.item-list > li:last-child {
+    margin-bottom: 0;
 }
 
 .item-list h1 {
@@ -151,6 +161,14 @@ footer {
         background-color: #000;
     }
 }
+
+@media(max-width: 600px) {
+    .wrapper {
+        padding: 40px 20px;
+    }
+}
+
+
 
 pre {
     margin-bottom: 1.5em;
