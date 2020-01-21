@@ -1,17 +1,15 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Marinel Maxime on 02/01/2020.
 //
 
 import Foundation
-import Publish
 import Plot
+import Publish
 
 public extension Theme {
-    /// The default "Foundation" theme that Publish ships with, a very
-    /// basic theme mostly implemented for demonstration purposes.
     static var foundation2: Self {
         Theme(
             htmlFactory: FoundationHTMLFactory(),
@@ -95,7 +93,6 @@ private struct FoundationHTMLFactory<Site: Website>: HTMLFactory {
             .body(
                 .header(for: context, selectedSection: nil),
                 .wrapper(
-
                 ),
                 .footer(for: context.site)
             )
@@ -184,8 +181,7 @@ private extension Node where Context == HTML.BodyContext {
                                 .text(context.sections[section].title)
                             ))
                         })
-                    )
-                )
+                ))
             )
         )
     }
@@ -215,7 +211,7 @@ private extension Node where Context == HTML.BodyContext {
         })
     }
 
-    static func footer<T: Website>(for site: T) -> Node {
+    static func footer<T: Website>(for _: T) -> Node {
         return .footer(
             .p(
                 .text("Generated using "),
