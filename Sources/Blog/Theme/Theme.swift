@@ -80,6 +80,7 @@ private struct FoundationHTMLFactory<Site: Website>: HTMLFactory {
                         .tagList(for: item, on: context.site)
                     )
                 ),
+                .discuss(for: context.site),
                 .footer(for: context.site)
             )
         )
@@ -224,6 +225,23 @@ private extension Node where Context == HTML.BodyContext {
                 .text("RSS feed"),
                 .href("/feed.rss")
             ))
+        )
+    }
+
+    static func discuss<T: Website>(for _: T) -> Node {
+        return .wrapper(
+            .div(
+                .class("comment"),
+                .h3("Want to discuss?"),
+                .p(
+                    .text("Open issues on "),
+                    .a(
+                        .href("https://github.com/bourvill/blog"),
+                        .text("Github")
+                    ),
+                    .text(" related to this content and discuss")
+                )
+            )
         )
     }
 }
