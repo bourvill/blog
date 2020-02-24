@@ -12,13 +12,40 @@ import Publish
 public extension Theme {
     static var foundation2: Self {
         Theme(
-            htmlFactory: FoundationHTMLFactory(),
+            htmlFactory: FoundationHTMLFactory(apps: [
+                .init(
+                    name: "Radio Stream Live",
+                    url: "https://apps.apple.com/us/app/radio-stream-live/id1099771228?l=fr&ls=1",
+                    img: "/img/apps/rsl.png"
+                ),
+                .init(
+                    name: "Compta Facile",
+                    url: "https://apps.apple.com/us/app/simplified-account/id1200288004?l=fr&ls=1",
+                    img: "/img/apps/bank.png"
+                ),
+                .init(
+                    name: "Wallagag",
+                    url: "https://apps.apple.com/us/app/wallabag-2-official/id1170800946?l=fr&ls=1",
+                    img: "/img/apps/wallabag.png"
+                ),
+                .init(
+                    name: "Deviner le mot",
+                    url: "https://apps.apple.com/us/app/deviner-le-mot/id986540981?l=fr&ls=1",
+                    img: "/img/apps/dlm.jpg"
+                ),
+            ]),
             resourcePaths: []
         )
     }
 }
 
 private struct FoundationHTMLFactory<Site: Website>: HTMLFactory {
+    let apps: [App]
+
+    init(apps: [App]) {
+        self.apps = apps
+    }
+
     func makeIndexHTML(for index: Index,
                        context: PublishingContext<Site>) throws -> HTML {
         HTML(
@@ -26,6 +53,7 @@ private struct FoundationHTMLFactory<Site: Website>: HTMLFactory {
             .head(for: index, on: context.site),
             .body(
                 .header(for: context, selectedSection: nil),
+                .appList(apps),
                 .wrapper(
                     .h1(.text(index.title)),
                     .p(
@@ -164,6 +192,28 @@ private extension Node where Context == HTML.BodyContext {
         .div(.class("wrapper"), .group(nodes))
     }
 
+    static func appList(_ apps: [App]) -> Node {
+        .div(
+            .class("apps-list"),
+            .ul(
+                .forEach(apps) { app in
+                    .li(
+                        img(
+                            .src(app.img),
+                            .width("20"),
+                            .height("20")
+                        ),
+                        .a(
+                            .text(app.name),
+                            .href(app.url),
+                            .attribute(named: "target", value: "_blank")
+                        )
+                    )
+                }
+            )
+        )
+    }
+
     static func header<T: Website>(
         for context: PublishingContext<T>,
         selectedSection: T.SectionID?
@@ -181,8 +231,8 @@ private extension Node where Context == HTML.BodyContext {
                                 .href(context.sections[section].path),
                                 .text(context.sections[section].title)
                             ))
-                        })
-                ))
+                            })
+                    ))
             )
         )
     }
@@ -204,12 +254,17 @@ private extension Node where Context == HTML.BodyContext {
     }
 
     static func tagList<T: Website>(for item: Item<T>, on site: T) -> Node {
-        return .ul(.class("tag-list"), .forEach(item.tags) { tag in
-            .li(.a(
-                .href(site.path(for: tag)),
-                .text(tag.string)
-            ))
-        })
+        return .ul(
+            .class("tag-list"),
+            .forEach(item.tags) { tag in
+                .li(
+                    .a(
+                        .href(site.path(for: tag)),
+                        .text(tag.string)
+                    )
+                )
+            }
+        )
     }
 
     static func footer<T: Website>(for _: T) -> Node {
