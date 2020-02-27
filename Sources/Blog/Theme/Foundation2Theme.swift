@@ -12,7 +12,7 @@ import Publish
 public extension Theme {
     static var foundation2: Self {
         Theme(
-            htmlFactory: FoundationHTMLFactory(apps: [
+            htmlFactory: Foundation2HTMLFactory(apps: [
                 .init(
                     name: "Radio Stream Live",
                     url: "https://apps.apple.com/us/app/radio-stream-live/id1099771228?l=fr&ls=1",
@@ -39,7 +39,7 @@ public extension Theme {
     }
 }
 
-private struct FoundationHTMLFactory<Site: Website>: HTMLFactory {
+private struct Foundation2HTMLFactory<Site: Website>: HTMLFactory {
     let apps: [App]
 
     init(apps: [App]) {

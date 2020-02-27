@@ -20,7 +20,7 @@ struct Blog: Website {
 }
 
 try Blog().publish(
-    withTheme: .foundation2,
+    withTheme: .bootstrap,
     indentation: .tabs(1),
     at: nil,
     rssFeedSections: Set(Blog.SectionID.allCases),
