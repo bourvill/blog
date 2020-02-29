@@ -13,7 +13,7 @@ struct Blog: Website {
     struct ItemMetadata: WebsiteItemMetadata {}
 
     var url = URL(string: "https://maxime.marinel.me")!
-    var name = "Bourvill blog"
+    var name = "Bourvill<Blog>"
     var description = ""
     var language: Language { .french }
     var imagePath: Path? { nil }

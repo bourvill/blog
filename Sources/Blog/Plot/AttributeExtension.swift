@@ -14,6 +14,6 @@ extension Attribute where Context == HTML.ImageContext {
     }
 
     static func height(_ value: String) -> Self {
-        Attribute(name: "width", value: value)
+        Attribute(name: "height", value: value)
     }
 }

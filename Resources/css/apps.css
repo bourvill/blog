@@ -1,0 +1,10 @@
+.apps {
+    margin-bottom: 20px;
+}
+
+.apps > .col {
+    border-radius: 25px;
+    background: #DCDCDC;
+    margin: 5px;
+    padding: 10px;
+}
