@@ -77,6 +77,11 @@ jobs:
           find: "eu.gcr.io/copper-actor-238611/blog.*"
           replace: "eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA"
           include: "blog/"
+        env:
+          GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+          GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+          GITHUB_SHA: ${{ github.sha }}
+          IMAGE: blog
       - name: Commit changes
         uses: EndBug/add-and-commit@v4
         with:
