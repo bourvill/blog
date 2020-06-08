@@ -66,13 +66,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: upload
     steps:
-    - name: SSH Commands
-      uses: appleboy/ssh-action@v0.0.6
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        debug: true
-        envs: GKE_PROJECT,IMAGE,GITHUB_SHA
-        script: kubectl set image deployment/blog blog=eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+      - name: Check out kub private repo
+        uses: actions/checkout@master
+        with:
+            repository: bourvill/newkub
+      - name: Replace img name
+        uses: shitiomatic/str-replace@master
+        with:
+          find: "eu.gcr.io\/copper-actor-238611\/blog.*"
+          replace: "eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA"
+          include: "blog/"
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: CI
+          author_email: maxime.m62@gmail.com
+          message: "Update blog img"
+          add: "."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
