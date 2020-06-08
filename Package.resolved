@@ -41,9 +41,9 @@
         "package": "Publish",
         "repositoryURL": "https://github.com/johnsundell/publish.git",
         "state": {
-          "branch": null,
-          "revision": "9458bacb992f1fde35648fd4bb379fb7335d571c",
-          "version": "0.5.0"
+          "branch": "master",
+          "revision": "4de05831504ed7b411a179109c0c0ebd5c602453",
+          "version": null
         }
       },
       {
@@ -60,17 +60,17 @@
         "repositoryURL": "https://github.com/johnsundell/splash.git",
         "state": {
           "branch": null,
-          "revision": "b501e834a8fb433e8ff97a14104968eec3c6c3cc",
-          "version": "0.11.0"
+          "revision": "03ea9bdcbb21354b66499d3d826a140a5119bc65",
+          "version": "0.12.0"
         }
       },
       {
         "package": "SplashPublishPlugin",
         "repositoryURL": "https://github.com/johnsundell/splashpublishplugin",
         "state": {
-          "branch": null,
-          "revision": "34bb50bd83b2a40c63afc35f090c76619dc149ce",
-          "version": "0.1.0"
+          "branch": "master",
+          "revision": "d6ff24d0f5b101f368ba612434e40494c3fbaa62",
+          "version": null
         }
       },
       {

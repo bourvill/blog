@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 
 import PackageDescription
 
@@ -8,13 +8,16 @@ let package = Package(
         .executable(name: "Blog", targets: ["Blog"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/johnsundell/publish.git", from: "0.2.0"),
-        .package(url: "https://github.com/johnsundell/splashpublishplugin", from: "0.1.0"),
+        .package(name: "Publish", url: "https://github.com/johnsundell/publish.git", .branch("master")),
+        .package(name: "SplashPublishPlugin", url:"https://github.com/johnsundell/splashpublishplugin", .branch("master")),
     ],
     targets: [
         .target(
             name: "Blog",
-            dependencies: ["Publish", "SplashPublishPlugin"]
+            dependencies: [
+                "Publish",
+                "SplashPublishPlugin"
+            ]
         ),
     ]
 )
