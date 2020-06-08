@@ -74,8 +74,8 @@ jobs:
       - name: Replace img name
         uses: shitiomatic/str-replace@master
         with:
-          find: "eu.gcr.io/copper-actor-238611/blog.*"
-          replace: "eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA"
+          find: "image: .*"
+          replace: "image: eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA"
           include: "blog/"
         env:
           GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
