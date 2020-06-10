@@ -72,11 +72,8 @@ jobs:
             token: ${{ secrets.PAT }}
             repository: bourvill/newkub
       - name: Replace img name
-        uses: shitiomatic/str-replace@master
-        with:
-          find: "image: .*"
-          replace: "image: eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA"
-          include: "blog/"
+        run: |
+          sed -i "s|image:.*|image: eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA|g" blog/blog-deployment.yaml
         env:
           GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
           GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
