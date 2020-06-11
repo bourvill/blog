@@ -1,0 +1,80 @@
+---
+date: 2020-06-11 08:00
+description: Write Color Picker in 5 minutes with swiftUI
+tags: SwiftUI, swift
+---
+
+# Write Color Picker in 5 minutes with swiftUI 
+
+Playgrounds app is the most powerful tool to write thing and test. 
+Playgrounds is available on MacOs and iPadOs, and the code sample is written on this tool.
+
+
+## Preparing Playgrounds for SwiftUI 
+
+```
+// Import framework
+import SwiftUI
+import Combine
+import PlaygroundSupport
+
+// Create View
+struct SandboxView: View {
+    
+    var body: some View {
+        Text("Welcome")
+    }
+}
+
+PlaygroundPage.current.setLiveView(SandboxView())
+
+```
+
+Press play, Playgrounds now show a live view view the "Welcome text"
+
+## The ColorPicker with SwiftUI
+
+### First Part : ObservableObject
+
+```
+final class ColorPicker: ObservableObject {
+    @Published var red: Double = 0
+    @Published var green: Double = 0
+    @Published var blue: Double = 0
+    @Published var color = Color.white
+    
+    var cancellable: AnyCancellable?
+    
+    init() {
+    	// Combine each change on publisher red, green, blue, map to Color, and assign to published color
+        cancellable = Publishers.CombineLatest3($red, $green, $blue)
+	        .map { (arg0) in let (r, g, b) = arg0; 
+	            return Color(red: r/255, green: g/255, blue: b/255) 
+	        }
+        	.assign(to: \.color, on: self)
+    }
+}
+```
+
+### Update Sandbox view and play
+
+Now update the SandboxView
+```
+struct SandboxView: View {
+    @ObservedObject var colorPicker = ColorPicker()
+    
+    var body: some View {
+        VStack {
+            Slider(value: $colorPicker.red, in: 0...255, step: 1)
+            Text("Red \(colorPicker.red, specifier: "%.0f")")
+            Slider(value: $colorPicker.green, in: 0...255, step: 1)
+            Text("Green \(colorPicker.green, specifier: "%.0f")")
+            Slider(value: $colorPicker.blue, in: 0...255, step: 1)
+            Text("Blue \(colorPicker.blue, specifier: "%.0f")")
+            Rectangle().foregroundColor(colorPicker.color)
+        }
+    }
+}
+```
+
+Now you can play with a ColorPicker, Simple right ?
