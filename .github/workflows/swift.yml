@@ -60,10 +60,10 @@ jobs:
       with:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-        registry: ghcr.io
-        repository: bourvill/blog
+        registry: docker.pkg.github.com
+        repository: bourvill/blog/blog
         tag_with_ref: true
-        
+
     # Push the Docker image to Google Container Registry
 #    - name: Publish
 #      run: |
