@@ -55,36 +55,45 @@ jobs:
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" Output
 
+    - name: Push to GitHub Packages
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ghcr.io
+        repository: bourvill/blog
+        tag_with_ref: true
+        
     # Push the Docker image to Google Container Registry
-    - name: Publish
-      run: |
-        docker push eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
-        docker tag eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA eu.gcr.io/$GKE_PROJECT/$IMAGE:latest
-        docker push eu.gcr.io/$GKE_PROJECT/$IMAGE:latest
+#    - name: Publish
+#      run: |
+#        docker push eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
+#        docker tag eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA eu.gcr.io/$GKE_PROJECT/$IMAGE:latest
+#        docker push eu.gcr.io/$GKE_PROJECT/$IMAGE:latest
 
-  update:
-    runs-on: ubuntu-latest
-    needs: upload
-    steps:
-      - name: Check out kub private repo
-        uses: actions/checkout@master
-        with:
-            token: ${{ secrets.PAT }}
-            repository: bourvill/newkub
-      - name: Replace img name
-        run: |
-          sed -i "s|image:.*|image: eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA|g" blog/blog-deployment.yaml
-        env:
-          GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
-          GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-          GITHUB_SHA: ${{ github.sha }}
-          IMAGE: blog
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v4
-        with:
-          author_name: CI
-          author_email: maxime.m62@gmail.com
-          message: "Update blog img"
-          add: "."
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#  update:
+#    runs-on: ubuntu-latest
+#    needs: upload
+#    steps:
+#      - name: Check out kub private repo
+#        uses: actions/checkout@master
+#        with:
+#            token: ${{ secrets.PAT }}
+#            repository: bourvill/newkub
+#      - name: Replace img name
+#        run: |
+#          sed -i "s|image:.*|image: eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA|g" blog/blog-deployment.yaml
+#        env:
+#          GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+#          GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+#          GITHUB_SHA: ${{ github.sha }}
+#          IMAGE: blog
+#      - name: Commit changes
+#        uses: EndBug/add-and-commit@v4
+#        with:
+#          author_name: CI
+#          author_email: maxime.m62@gmail.com
+#          message: "Update blog img"
+#          add: "."
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
