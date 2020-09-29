@@ -34,30 +34,14 @@ jobs:
       with:
         name: output
         path: .
-    # Setup gcloud CLI
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '270.0.0'
-        service_account_email: ${{ secrets.GKE_EMAIL }}
-        service_account_key: ${{ secrets.GKE_KEY }}
-
-    # Configure docker to use the gcloud command-line 
     - name: Push to GitHub Packages
       uses: docker/build-push-action@v1
       with:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-        registry: docker.pkg.github.com
-        repository: bourvill/blog/blog
+        registry: ghcr.io
+        repository: bourvill/blog
         tag_with_ref: true
-
-    # Push the Docker image to Google Container Registry
-#    - name: Publish
-#      run: |
-#        docker push eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
-#        docker tag eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA eu.gcr.io/$GKE_PROJECT/$IMAGE:latest
-#        docker push eu.gcr.io/$GKE_PROJECT/$IMAGE:latest
-
 #  update:
 #    runs-on: ubuntu-latest
 #    needs: upload
@@ -69,7 +53,7 @@ jobs:
 #            repository: bourvill/newkub
 #      - name: Replace img name
 #        run: |
-#          sed -i "s|image:.*|image: eu.gcr.io/$GKE_PROJECT/$IMAGE:$GITHUB_SHA|g" blog/blog-deployment.yaml
+#          sed -i "s|image:.*|image: docker.pkg.github.com/bourvill/blog/blog|g" blog/blog-deployment.yaml
 #        env:
 #          GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
 #          GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
