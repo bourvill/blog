@@ -38,7 +38,7 @@ jobs:
       uses: docker/build-push-action@v1
       with:
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ secrets.NEW_PAT }}
         registry: ghcr.io
         repository: bourvill/blog
         tag_with_ref: true
