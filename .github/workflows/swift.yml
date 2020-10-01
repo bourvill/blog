@@ -42,6 +42,7 @@ jobs:
         registry: ghcr.io
         repository: bourvill/blog
         tag_with_ref: true
+        tag_with_sha: true
 #  update:
 #    runs-on: ubuntu-latest
 #    needs: upload
