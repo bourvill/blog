@@ -10,6 +10,8 @@ extension PublishingStep where Site == Blog {
                     section.title = "Posts"
                 case .thinks:
                     section.title = "Thinks"
+                case .cv:
+                    section.title = "CV"
                 }
             }
         }

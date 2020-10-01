@@ -8,6 +8,7 @@ struct Blog: Website {
     enum SectionID: String, WebsiteSectionID {
         case posts
         case thinks
+        case cv
     }
 
     struct ItemMetadata: WebsiteItemMetadata {}
@@ -20,7 +21,7 @@ struct Blog: Website {
 }
 
 try Blog().publish(
-    withTheme: .bootstrap,
+    withTheme: .devBlog,
     indentation: .tabs(1),
     at: nil,
     rssFeedSections: Set(Blog.SectionID.allCases),

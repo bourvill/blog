@@ -47,7 +47,8 @@ private struct Foundation2HTMLFactory<Site: Website>: HTMLFactory {
     }
 
     func makeIndexHTML(for index: Index,
-                       context: PublishingContext<Site>) throws -> HTML {
+                       context: PublishingContext<Site>) throws -> HTML
+    {
         HTML(
             .lang(context.site.language),
             .head(for: index, on: context.site),
@@ -75,7 +76,8 @@ private struct Foundation2HTMLFactory<Site: Website>: HTMLFactory {
     }
 
     func makeSectionHTML(for section: Section<Site>,
-                         context: PublishingContext<Site>) throws -> HTML {
+                         context: PublishingContext<Site>) throws -> HTML
+    {
         HTML(
             .lang(context.site.language),
             .head(for: section, on: context.site),
@@ -91,7 +93,8 @@ private struct Foundation2HTMLFactory<Site: Website>: HTMLFactory {
     }
 
     func makeItemHTML(for item: Item<Site>,
-                      context: PublishingContext<Site>) throws -> HTML {
+                      context: PublishingContext<Site>) throws -> HTML
+    {
         HTML(
             .lang(context.site.language),
             .head(for: item, on: context.site),
@@ -115,7 +118,8 @@ private struct Foundation2HTMLFactory<Site: Website>: HTMLFactory {
     }
 
     func makePageHTML(for page: Page,
-                      context: PublishingContext<Site>) throws -> HTML {
+                      context: PublishingContext<Site>) throws -> HTML
+    {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -129,7 +133,8 @@ private struct Foundation2HTMLFactory<Site: Website>: HTMLFactory {
     }
 
     func makeTagListHTML(for page: TagListPage,
-                         context: PublishingContext<Site>) throws -> HTML? {
+                         context: PublishingContext<Site>) throws -> HTML?
+    {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -156,7 +161,8 @@ private struct Foundation2HTMLFactory<Site: Website>: HTMLFactory {
     }
 
     func makeTagDetailsHTML(for page: TagDetailsPage,
-                            context: PublishingContext<Site>) throws -> HTML? {
+                            context: PublishingContext<Site>) throws -> HTML?
+    {
         HTML(
             .lang(context.site.language),
             .head(for: page, on: context.site),
@@ -231,7 +237,7 @@ private extension Node where Context == HTML.BodyContext {
                                 .href(context.sections[section].path),
                                 .text(context.sections[section].title)
                             ))
-                            })
+                        })
                     ))
             )
         )
