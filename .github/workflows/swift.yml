@@ -43,29 +43,26 @@ jobs:
         repository: bourvill/blog
         tag_with_ref: true
         tag_with_sha: true
-#  update:
-#    runs-on: ubuntu-latest
-#    needs: upload
-#    steps:
-#      - name: Check out kub private repo
-#        uses: actions/checkout@master
-#        with:
-#            token: ${{ secrets.PAT }}
-#            repository: bourvill/newkub
-#      - name: Replace img name
-#        run: |
-#          sed -i "s|image:.*|image: docker.pkg.github.com/bourvill/blog/blog|g" blog/blog-deployment.yaml
-#        env:
-#          GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
-#          GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-#          GITHUB_SHA: ${{ github.sha }}
-#          IMAGE: blog
-#      - name: Commit changes
-#        uses: EndBug/add-and-commit@v4
-#        with:
-#          author_name: CI
-#          author_email: maxime.m62@gmail.com
-#          message: "Update blog img"
-#          add: "."
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  update:
+    runs-on: ubuntu-latest
+    needs: upload
+    steps:
+      - name: Check out kub private repo
+        uses: actions/checkout@master
+        with:
+            token: ${{ secrets.PAT }}
+            repository: bourvill/newkub
+      - name: Replace img name
+        run: |
+          sed -i "s|image:.*|image: ghcr.io/bourvill/blog:$GITHUB_SHA|g" blog/blog-deployment.yaml
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          author_name: CI
+          author_email: maxime.m62@gmail.com
+          message: "Update blog img"
+          add: "."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
