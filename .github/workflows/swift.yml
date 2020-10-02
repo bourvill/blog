@@ -54,10 +54,9 @@ jobs:
             repository: bourvill/newkub
       - name: Replace img name
         run: |
-          sed -i "s|image:.*|image: ghcr.io/bourvill/blog:$SHA|g" blog/blog-deployment.yaml
+          sed -i "s|image:.*|image: ghcr.io/bourvill/blog:sha-$(echo ${GITHUB_SHA} | cut -c1-8)|g" blog/blog-deployment.yaml
         env:
           GITHUB_SHA: ${{ github.sha }}
-          SHA: sha-${{github.sha::7}}
       - name: Commit changes
         uses: EndBug/add-and-commit@v4
         with:
