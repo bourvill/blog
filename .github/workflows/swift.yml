@@ -54,7 +54,7 @@ jobs:
             repository: bourvill/newkub
       - name: Replace img name
         run: |
-          sed -i "s|image:.*|image: ghcr.io/bourvill/blog:sha-$(echo ${GITHUB_SHA} | cut -c1-8)|g" blog/blog-deployment.yaml
+          sed -i "s|image:.*|image: ghcr.io/bourvill/blog:sha-$(echo ${GITHUB_SHA} | cut -c1-7)|g" blog/blog-deployment.yaml
         env:
           GITHUB_SHA: ${{ github.sha }}
       - name: Commit changes
