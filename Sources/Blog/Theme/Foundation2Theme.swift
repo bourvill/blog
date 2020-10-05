@@ -12,28 +12,7 @@ import Publish
 public extension Theme {
     static var foundation2: Self {
         Theme(
-            htmlFactory: Foundation2HTMLFactory(apps: [
-                .init(
-                    name: "Radio Stream Live",
-                    url: "https://apps.apple.com/us/app/radio-stream-live/id1099771228?l=fr&ls=1",
-                    img: "/img/apps/rsl.png"
-                ),
-                .init(
-                    name: "Compta Facile",
-                    url: "https://apps.apple.com/us/app/simplified-account/id1200288004?l=fr&ls=1",
-                    img: "/img/apps/bank.png"
-                ),
-                .init(
-                    name: "Wallagag",
-                    url: "https://apps.apple.com/us/app/wallabag-2-official/id1170800946?l=fr&ls=1",
-                    img: "/img/apps/wallabag.png"
-                ),
-                .init(
-                    name: "Deviner le mot",
-                    url: "https://apps.apple.com/us/app/deviner-le-mot/id986540981?l=fr&ls=1",
-                    img: "/img/apps/dlm.jpg"
-                ),
-            ]),
+            htmlFactory: Foundation2HTMLFactory(apps: App.allCases),
             resourcePaths: []
         )
     }
@@ -244,7 +223,7 @@ private extension Node where Context == HTML.BodyContext {
     }
 
     static func itemList<T: Website>(for items: [Item<T>], on site: T) -> Node {
-        return .ul(
+        .ul(
             .class("item-list"),
             .forEach(items) { item in
                 .li(.article(
@@ -260,7 +239,7 @@ private extension Node where Context == HTML.BodyContext {
     }
 
     static func tagList<T: Website>(for item: Item<T>, on site: T) -> Node {
-        return .ul(
+        .ul(
             .class("tag-list"),
             .forEach(item.tags) { tag in
                 .li(
@@ -274,7 +253,7 @@ private extension Node where Context == HTML.BodyContext {
     }
 
     static func footer<T: Website>(for _: T) -> Node {
-        return .footer(
+        .footer(
             .p(
                 .text("Generated using "),
                 .a(
@@ -290,7 +269,7 @@ private extension Node where Context == HTML.BodyContext {
     }
 
     static func discuss<T: Website>(for _: T) -> Node {
-        return .wrapper(
+        .wrapper(
             .div(
                 .class("comment"),
                 .h3("Want to discuss?"),

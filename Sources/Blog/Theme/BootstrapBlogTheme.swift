@@ -11,28 +11,7 @@ import Publish
 
 extension Theme {
     static var bootstrap: Self {
-        Theme(htmlFactory: BootstrapBlogHTMLFactory(apps: [
-            .init(
-                name: "Radio Stream Live",
-                url: "https://apps.apple.com/us/app/radio-stream-live/id1099771228?l=fr&ls=1",
-                img: "/img/apps/rsl.png"
-            ),
-            .init(
-                name: "Compta Facile",
-                url: "https://apps.apple.com/us/app/simplified-account/id1200288004?l=fr&ls=1",
-                img: "/img/apps/bank.png"
-            ),
-            .init(
-                name: "Wallagag",
-                url: "https://apps.apple.com/us/app/wallabag-2-official/id1170800946?l=fr&ls=1",
-                img: "/img/apps/wallabag.png"
-            ),
-            .init(
-                name: "Deviner le mot",
-                url: "https://apps.apple.com/us/app/deviner-le-mot/id986540981?l=fr&ls=1",
-                img: "/img/apps/dlm.jpg"
-            ),
-        ]))
+        Theme(htmlFactory: BootstrapBlogHTMLFactory(apps: App.allCases))
     }
 }
 

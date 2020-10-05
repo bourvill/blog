@@ -144,25 +144,40 @@ final class DevBlogFactory<Site: Website>: HTMLFactory {
 
 private extension Node where Context == HTML.BodyContext {
     static func navBar<T: Website>(for context: PublishingContext<T>, selectedSection _: T.SectionID?) -> Node {
-        let sectionIDs = T.SectionID.allCases
-
-        return .ul(
-            .class("navbar-nav flex-column text-left"),
-            .forEach(sectionIDs) { section in
-                .li(
-                    .class("nav-item"),
-                    .a(
-                        .class("nav-link"),
-                        .href(context.sections[section].path),
-                        .i(
-                            .class("fas fa-home fa-fw mr-2")
-                        ),
-                        .text(
-                            context.sections[section].title
+        .div(
+            .ul(
+                .class("navbar-nav flex-column text-left"),
+                .forEach(T.SectionID.allCases) { section in
+                    .li(
+                        .class("nav-item"),
+                        .a(
+                            .class("nav-link"),
+                            .href(context.sections[section].path),
+                            .i(
+                                .class("fas fa-home fa-fw mr-2")
+                            ),
+                            .text(
+                                context.sections[section].title
+                            )
                         )
                     )
-                )
-            }
+                }
+            ),
+            .hr(),
+            .p(.b(.text("My apps"))),
+            .ul(
+                .class("navbar-nav flex-column text-left"),
+                .forEach(context.site.apps) { app in
+                    .li(
+                        .class("nav-item"),
+                        .a(
+                            .class("nav-link"),
+                            .href(app.url),
+                            .text(app.name)
+                        )
+                    )
+                }
+            )
         )
     }
 
@@ -192,13 +207,8 @@ private extension Node where Context == HTML.BodyContext {
         }
     }
 
-    static func header<T: Website>(
-        for context: PublishingContext<T>,
-        selectedSection _: T.SectionID?
-    ) -> Node {
-        let sectionIDs = T.SectionID.allCases
-
-        return .header(
+    static func header<T: Website>(for context: PublishingContext<T>, selectedSection _: T.SectionID?) -> Node {
+        .header(
             .class("header text-center"),
             .h1(.text(context.site.name), .class("blog-name pt-lg-4 mb-0")),
             .nav(
@@ -211,7 +221,17 @@ private extension Node where Context == HTML.BodyContext {
                         .div(.class("bio mb-3"), "Hi, my name is Maxime Marinel. Welcome on my blog."),
                         .ul(
                             .class("social-list list-inline py-3 mx-auto"),
-                            .li(.class("list-inline-item"))
+                            .forEach(context.site.socials) { social in
+                                .li(
+                                    .class("list-inline-item"),
+                                    .a(
+                                        .href(social.link),
+                                        .i(
+                                            .class("fab \(social.icon) fa-fw")
+                                        )
+                                    )
+                                )
+                            }
                         ),
                         .hr()
                     ),
