@@ -13,7 +13,7 @@ Le lead dev à changé de team et je me retrouve à gérer la partie back. Des c
 
 Bref 2020 c'est mes premiers entretiens à faire passer, des décisions importantes, des décisions difficiles… Devoir rompre une période d’essai n’est vraiment pas une chose facile...
 
-Heureusement que le boulot ne se résume pas qu’a cela, puisque j’ai de nouveau le plaisir de travailler avec Francois! (Coucou @fbally). Il vient m’épauler sur le back. Il m'aide à me laisser un peu plus de temps sur les changements impactant pour l’entreprise, puisque j’oriente notre architecture vers le micro-service. L’équipe front, mobile est dingue! Des gens passionnants et passionnés !
+Heureusement que le boulot ne se résume pas qu’a cela, puisque j’ai de nouveau le plaisir de travailler avec Francois! (Coucou @franquoib). Il vient m’épauler sur le back. Il m'aide à me laisser un peu plus de temps sur les changements impactant pour l’entreprise, puisque j’oriente notre architecture vers le micro-service. L’équipe front, mobile est dingue! Des gens passionnants et passionnés !
 
 Coté serveur toujours sur Kubernetes! Quel système de dingue! J’ai même passé l’ensemble de mes projets perso sur cet env serveur! Mais la configuration reste compliqué et avec php c’est un peu du rodéo, mais cela fait partie des chantiers 2021, de l’optimisation code, et de l’optimisation serveur! Des défis passionnants!
 
