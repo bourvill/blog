@@ -91,10 +91,12 @@ Bref il suffit de reste 2 min avec moi et de prononcer le mot « Javascript »
 
 Alors 2021 sera encore plus Swift que Swift! Puisque 2021 sera l’année ou je vais pouvoir faire du swift aussi dans le cadre du travail pour une app encore secrète pour l’instant, mais le poc est déjà sur les rails.
 
+2021 sera aussi l'occasion de sortir de nouveau projet :) Un tournera autour de la plateforme Twitch, et un autre encore secret, mais pourrait sortir de ça un beau projet Saas.
+
 Je commence à gagner aussi en confiance sur ma capacité à faire du Swift en entreprise puisque depuis Octobre on a tenté à plusieurs reprise de me débaucher pour faire du Swift. Mais je refuse, si tu te demandes pourquoi tu n’as pas du lire le début =) 
 
 2021 sera aussi l'achèvement de la construction/renovation de la maison. Deux ans de travail, soir et weekend pour construire soit même sa maison, c’est une expérience dingue!
 
 2021 sera aussi l’année du mariage (oui le site est fait avec vapor 😅)
 
-2021 sera riche en émotion et que 2021 tiendra ses promesses! 
+2021 sera riche en émotion et j'espere que 2021 tiendra ses promesses! 
