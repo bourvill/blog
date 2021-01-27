@@ -3,7 +3,7 @@ name: Swift
 on: 
   push:
     branches:
-      - master
+      - main
 
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
