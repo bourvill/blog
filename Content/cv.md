@@ -21,11 +21,20 @@ J’utilise une partie de mon temps libre pour développer des applications iOS 
 Réalisation de site en PHP5, PHP7, POO
 Symfony
 Versionning : Git
-Bonne maitrise serveur : VMware (ESXi, vSphere), AWS, GCP, Debian, Ubuntu
+Bonne maitrise serveur et env cloud :AWS, GCP, Debian, Ubuntu, Kubernetes
 Autres langages: Swift (iOs)
 Autres outils : Docker, Caspitrano, Puppet, Ansible
 
 ## Expériences
+
+### Projet Perso
+#### Mazout' (Swift + SwiftUI + Vapor)
+
+Application pour trouver des stations essences avec le carburant le moins cher. Creation de l'api en utilsant Vapor
+
+#### Deviner le mot (SwiftUI)
+
+Application type de jeu times'up, ou il faut faire deviner le mot en réalisant un mime par exemple ou en dessinant 
 
 ### Open Source
 #### Wallabag 
@@ -36,6 +45,12 @@ Wallabag est un projet open source qui à pour but de sauvegarder des pages web.
 
 Je m’occupe de la partie iOS du projet, aujourd’hui l’application permet de se connecter à son instance, d’en récupérer le contenu et de le lire hors ligne sur son appareil mobile.
 
+### Kozikaza
+Techno: Symfony2 / Api-platform / Kubernetes
+
+Evolution de la platform social, detachement en micro service des evolutions (ex: api des pros, api media...) le but étant de construire une architecture modulaire et facilement maintenable.
+
+CI en github Action
 
 ### Skores
 Techno: Symfony2
