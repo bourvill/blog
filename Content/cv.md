@@ -19,15 +19,24 @@ J’utilise une partie de mon temps libre pour développer des applications iOS 
 
 ## Technologies
 Réalisation de site en PHP5, PHP7, POO
+
 Symfony
+
 Versionning : Git
+
 Bonne maitrise serveur et env cloud :AWS, GCP, Debian, Ubuntu, Kubernetes
+
 Autres langages: Swift (iOs)
+
 Autres outils : Docker, Caspitrano, Puppet, Ansible
 
 ## Expériences
 
 ### Projet Perso
+#### Barista - Caffeine tracker (Swift + SwiftUI + Vapor)
+
+Application pour aidez à suivre la consommation de café.
+
 #### Mazout' (Swift + SwiftUI + Vapor)
 
 Application pour trouver des stations essences avec le carburant le moins cher. Creation de l'api en utilsant Vapor
@@ -158,7 +167,5 @@ Déploiement serveur des sites
 
 ### Perso
 Permis B, véhicule personnel
+
 Projet d’un site de petites annonces sur le thème de l’airsoft www.annonces-airsoft.fr
-Projet de CMS, visible sur www.foxslegacy.fr
-Projet open source application iOs pour wallabag
-Plusieurs autres petites applications sur iOs: Radio, Jeux, Compta…
