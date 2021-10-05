@@ -1,6 +1,7 @@
 import Foundation
 
 enum App: CaseIterable {
+    case barista
     case mazout
     case rsl
     case easyCompta
@@ -9,6 +10,8 @@ enum App: CaseIterable {
 
     var name: String {
         switch self {
+        case .barista:
+            return "Barista - Caffeine Tracker"
         case .mazout:
             return "Mazout'"
         case .rsl:
@@ -24,6 +27,8 @@ enum App: CaseIterable {
 
     var url: String {
         switch self {
+        case .barista:
+            return "https://apple.co/3oxhXJe"
         case .mazout:
             return "https://apps.apple.com/us/app/id1442054061"
         case .rsl:
@@ -39,6 +44,8 @@ enum App: CaseIterable {
 
     var img: String {
         switch self {
+        case .barista:
+            return "/img/apps/barista.jpg"
         case .mazout:
             return "/img/apps/mazout.png"
         case .rsl:
