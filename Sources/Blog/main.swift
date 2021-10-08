@@ -9,6 +9,7 @@ struct Blog: Website {
         case posts
         case thinks
         case cv
+        case aqua
     }
 
     struct ItemMetadata: WebsiteItemMetadata {}
@@ -27,6 +28,6 @@ try Blog().publish(
     rssFeedSections: Set(Blog.SectionID.allCases),
     rssFeedConfig: .default,
     deployedUsing: nil,
-    additionalSteps: [.sectionTitles()],
+    additionalSteps: [.sectionTitles(), .aquaStep()],
     plugins: [.splash(withClassPrefix: "")]
 )

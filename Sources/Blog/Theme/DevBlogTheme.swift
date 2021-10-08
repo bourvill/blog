@@ -198,6 +198,7 @@ private extension Node where Context == HTML.BodyContext {
                                 .class("intro"),
                                 .text(item.description)
                             ),
+                            .if(item.imagePath != nil, .img(.src(item.imagePath ?? "")), else: .div()),
                             .a(.class("morre-link"), .href(item.path), "Read more &rarr;")
                         )
                     )
