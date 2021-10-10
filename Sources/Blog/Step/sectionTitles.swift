@@ -36,7 +36,7 @@ extension PublishingStep where Site == Blog {
                                 title: file.creationDate?.description ?? "",
                                 description: "",
                                 body: .init(
-                                    html: "<img src=\"\(imgPath)\"/>"),
+                                    html: "<img src=\"\(imgPath)\" style=\"width:500px; height:500px;\"/>"),
                                 date: file.creationDate!,
                                 lastModified: file.modificationDate!,
                                 imagePath: .init(imgPath)
