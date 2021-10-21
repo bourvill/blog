@@ -41,7 +41,7 @@ final class DevBlogFactory<Site: Website>: HTMLFactory {
                                 for: context.allItems(
                                     sortedBy: \.date,
                                     order: .descending
-                                ),
+                                ).filter { $0.sectionID.rawValue == Blog.SectionID.posts.rawValue },
                                 on: context.site
                             )
                         )
