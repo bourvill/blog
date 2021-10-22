@@ -41,7 +41,7 @@ final class DevBlogFactory<Site: Website>: HTMLFactory {
                                 for: context.allItems(
                                     sortedBy: \.date,
                                     order: .descending
-                                ).filter { $0.sectionID.rawValue == Blog.SectionID.posts.rawValue },
+                                ).filter { value in [Blog.SectionID.posts.rawValue, Blog.SectionID.thinks.rawValue].contains(where: { value.sectionID.rawValue == $0 }) },
                                 on: context.site
                             )
                         )
