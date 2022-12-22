@@ -20,7 +20,7 @@ jobs:
         swift-version: "5.7"
     - uses: actions/checkout@v1
     - name: Build
-      run: swift run
+      run: swift run -c release
     - name: Copy Dockerfile
       run: mv Dockerfile Output
     - name: Upload Output for upload
