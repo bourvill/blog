@@ -3,7 +3,7 @@ import Foundation
 enum App: CaseIterable {
     case barista
     case mazout
-    case easyCompta
+    case reefBuddy
     case wallabag
     case dlm
 
@@ -13,8 +13,8 @@ enum App: CaseIterable {
             return "Barista - Caffeine Tracker"
         case .mazout:
             return "Mazout'"
-        case .easyCompta:
-            return "Compta Facile"
+        case .reefBuddy:
+            return "Reef buddy"
         case .wallabag:
             return "Wallabag"
         case .dlm:
@@ -28,8 +28,8 @@ enum App: CaseIterable {
             return "https://apple.co/3oxhXJe"
         case .mazout:
             return "https://apps.apple.com/us/app/id1442054061"
-        case .easyCompta:
-            return "https://apps.apple.com/us/app/simplified-account/id1200288004?l=fr&ls=1"
+        case .reefBuddy:
+            return "https://apps.apple.com/fr/app/reef-buddy/id1593580822"
         case .wallabag:
             return "https://apps.apple.com/us/app/wallabag-2-official/id1170800946?l=fr&ls=1"
         case .dlm:
@@ -43,8 +43,8 @@ enum App: CaseIterable {
             return "/img/apps/barista.jpg"
         case .mazout:
             return "/img/apps/mazout.png"
-        case .easyCompta:
-            return "/img/apps/bank.png"
+        case .reefBuddy:
+            return "/img/apps/reefbuddy.png"
         case .wallabag:
             return "/img/apps/wallabag.png"
         case .dlm:
