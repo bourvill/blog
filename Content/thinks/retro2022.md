@@ -25,7 +25,7 @@ Je discute avec mon chef, et il s'avère que ce n'est pas la première fois qu'i
 Maintenant tout est rentré dans l'ordre et je suis dans un environnement de travail plaisant et je n'ai plus la boule au ventre de coder.
 
 ## Un bébé
-Mathéo est arrivé le 30 juin 2021, quel chamboulement dans une vie, mais quel bonheur! Vous passez une journée de merde, un simple de ses sourires suffit à tout faire oublier.
+Mathéo est arrivé le 30 juin, quel chamboulement dans une vie, mais quel bonheur! Vous passez une journée de merde, un simple de ses sourires suffit à tout faire oublier.
 On a une chance incroyable, pas de RGO, il a très vite fait ses nuits. 
 Il nous a fait peur dernièrement quand le COVID est arrivé à la maison, un petit passage aux urgences pour rassurer des parents inquiets... 
 
