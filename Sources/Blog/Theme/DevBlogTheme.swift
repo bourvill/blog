@@ -219,7 +219,7 @@ private extension Node where Context == HTML.BodyContext {
                     .div(
                         .class("profile-section pt-3 pt-lg-0"),
                         .img(.class("profile-image mb-3 rounded-circle mx-auto"), .src("/img/IMG_1469.jpg")),
-                        .div(.class("bio mb-3"), "Hi, my name is Maxime Marinel. Welcome on my blog."),
+                        //.div(.class("bio mb-3"), "Hi, my name is Maxime Marinel. Welcome on my blog."),
                         .ul(
                             .class("social-list list-inline py-3 mx-auto"),
                             .forEach(context.site.socials) { social in
