@@ -85,3 +85,5 @@ Dans un premier temps toutes mes apps et projets devront avoir un objectif et su
 J'ai beaucoup d'app et je vais donc me fixer des objectifs de rentabilité sur toutes mes apps. 
 
 Le but est d'avoir un bilan comptable pour la fin d'année et d'avoir des metrics pour évaluer les progrès et surtout me challenger à atteindre les objectifs.
+
+2024 sera la vrai reflexion pour le PPL. 
