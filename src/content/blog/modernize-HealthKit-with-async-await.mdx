@@ -1,0 +1,70 @@
+---
+title: Modernize HealthKit with async/await
+pubDate: 2022-03-25 23:38
+description: Modernize HealthKit with async/await
+heroImage: ../../assets/images/healthkit-128x128_2x.png
+category: Posts
+tags: [swift, async/await, HealthKit]
+---
+
+# Modernize HealthKit with async/await
+
+HealthKit provides a central repository for health and fitness data on iPhone and Apple Watch. With the user’s permission, apps communicate with the HealthKit store to access and share this data.
+
+Many HealthKit methods use a completion model.
+HealthKit gets the new Swift concurrency approach: async/await.
+
+This tutorial require iOS 15.4
+
+## Request Authorization from user with HealthKit
+
+First, write the default requirement code
+
+```swift
+// Prepare HealthStore
+let store = HKHealthStore()
+// choose data you want in this example we want Caffeine
+let samplesType: Set<HKSampleType> = [HKObjectType.quantityType(forIdentifier: .dietaryCaffeine)!]
+
+//Healtkit is only available on iOS and WatchOS
+guard HKHealthStore.isHealthDataAvailable() else {
+ fatalError()
+}
+
+do {
+ let authorization = try await healthStore.requestAuthorization(toShare: samplesType, read: samplesType)
+} catch {
+ fatalError(error.localizedDescription)
+}
+```
+
+## Your first HealthKit query using the new Swift concurrency async/await
+
+```swift
+// Prepare HealthStore
+let store = HKHealthStore()
+// choose data you want in this example we want Caffeine
+let samplesType: Set<HKSampleType> = [HKObjectType.quantityType(forIdentifier: .dietaryCaffeine)!]
+
+// Prepare the date one week ago.
+let calendar = Calendar.current
+var components = calendar.dateComponents([.year, .month, .day], from: Date())
+components.day = components.day! - 7
+let oneWeekAgo = calendar.date(from: components)
+
+// Prepare the predicate
+let queryPredicate = HKQuery.predicateForSamples(withStart: oneWeekAgo, end: .now, options: .strictEndDate)
+// Prepare descriptor that represente query
+let queryDescriptor = HKSampleQueryDescriptor(
+ predicates: [
+ .quantitySample(type: HKSampleType.quantityType(forIdentifier: .dietaryCaffeine)!, predicate: query),
+ ],
+ sortDescriptors: []
+)
+
+// We can now request the store
+let results = try await queryDescriptor.result(for: healthStore)
+
+// We can now play with the result, for example
+results.map(\.quantity).map { $0.doubleValue(for: .gram()) }
+```

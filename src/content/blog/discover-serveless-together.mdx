@@ -1,0 +1,118 @@
+---
+title: Let's discover serverless together
+pubDate: 2018-03-01 17:11
+description: Let's discover serveless together
+tags: [serverless, aws]
+category: Posts
+heroImage: ../../assets/images/book.jpg
+---
+
+# Let's discover serverless together
+
+I like discovering new things, and I think is a big part of my job, I have to experiment with new technologies in order to be up to date.
+
+After two articles on machine learning, today we talk about "serverless" technology.
+
+In the distant past … IT teams bought servers, then in another past, IT teams bought servers on time, by the minute, cloud computing as the marketing team like the sell to the customer.
+
+Now you can pay function per second and the resource it uses.
+
+I recently used this method for an ios application (https://itunes.apple.com/fr/app/m%C3%A9t%C3%A9o-motard/id1308229981?mt=8).
+
+The application changes wallpaper every hour. I could have put the wallpapers in the application.
+
+But by outsourcing this logic, I have the hand on the images to add without having to deploy a new release.
+I will introduce you to this part.
+
+**You must have an AWS account for this tutorial. The free tier works perfectly for this case.**
+
+## Install serverless.
+
+Serverless is your toolkit for deploying and operating serverless architectures.
+Focus on your application, not your infrastructure.
+
+### Installing the serverless cli
+
+```
+npm install -g serverless
+```
+
+### Create a boilerplate
+
+For this tutorial we will use python. Other languages ​​are available node, java …
+
+```
+serverless create --template aws-python --path demoserverless
+```
+
+Now let's go to the directory
+
+```
+cd demoserverless
+```
+
+Edit the serverless.yml
+
+```
+service: randomPicture #Service name
+#Choose a provider and configure
+provider:
+ name: aws
+ runtime: python2.7
+ stage: prod
+ memorySize: 128
+ timeout: 2
+ versionFunctions: false
+ region: eu-west-3 #France
+#Role are important allow your function access to S3
+ iamRoleStatements:
+ - Effect: "Allow"
+ Action:
+ - "s3:*"
+ Resource: "*"
+# define function for your service
+functions:
+ changePic:
+ handler: handler.randomPic # file and function name
+ # trigger in this tutorial we use CloudWatch and schedule 1 hour
+ events:
+ - schedule: rate(1 hour)
+```
+
+Edit the handler.py
+
+```
+from __future__ import print_function
+import boto3
+import random
+def randomPic(event, context):
+ s3 = boto3.resource('s3')
+ bucket = s3.Bucket('YOURBUCKET')
+ pictures = []
+ for object in bucket.objects.all():
+ if 'background.jpg' != object.key:
+ pictures.append(object.key)
+
+ random.shuffle(pictures)
+ s3.Object('YOURBUCKET','background.jpg').copy_from(CopySource='YOURBUCKET/' + pictures[0], ACL="public-read")
+```
+
+Now we are ready to deploy.
+
+Do not forget to create the bucket with the same name as the script and add .jpg images.
+
+```
+serverless deploy -v
+```
+
+And here is publicizing the background.jpg S3 bucket, I now have a service that changes an image every hour.
+
+You will tell me a cron on my server would do the trick. Bad thinking old computer guy.
+
+With that you have a service INDEPENDENT, that works for 2 seconds and you only pay for these two seconds.
+
+Many triggers are available, for example, you can create a thumbnailer, when an image falls in the bucket, clean, resize.
+
+Or for example connect it to ApiGateway.
+
+So many possibilities to pay only the seconds of use. Here's a new way to use your resources

@@ -1,0 +1,38 @@
+---
+const today = new Date()
+
+const APPS = [
+	{
+		name: 'Github',
+		url: 'https://github.com/bourvill'
+	},
+	{
+		name: 'Twitter',
+		url: 'https://x.com/bourvill'
+	},
+	{
+		name: 'Mastodon',
+		url: 'https://iosdev.space/@bourvill'
+	},
+	{
+		name: 'LinkedIn',
+		url: 'https://www.linkedin.com/in/💻-maxime-📱marinel-5292a2151/'
+	}
+]
+---
+
+<footer class='flex justify-center items-center w-full px-16 h-28 border-t-2'>
+	<div class='flex justify-center items-center md:justify-end gap-3 md:p-0'>
+		&copy; {today.getFullYear()} Maxime Marinel. All rights reserved.
+	</div>
+	<!--<div class='flex justify-center items-center md:justify-end gap-3 md:p-0'>
+		{
+			APPS.map((app) => (
+				<a class='' href={app.url} target='_blank' aria-label={app.name}>
+					<span>{app.name} </span>
+				</a>
+			))
+		}
+	</div>
+	 -->
+</footer>

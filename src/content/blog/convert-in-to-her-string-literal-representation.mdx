@@ -1,0 +1,99 @@
+---
+heroImage: ../../assets/images/Swift_logo_horz_lockup_color_rgb.svg
+category: Posts
+description: Convert int to her string literal representation
+pubDate: 2020-06-24T20:11:00.000Z
+draft: false
+tags:
+  - swift
+title: Convert int to her string literal representation
+---
+
+# Convert int to her string literal representation
+
+## NumberFormatter
+
+Swift come with many formatter, we can found DateFormatter, LengthFormatter, EnergyFormatter.
+
+Today I will introduce NumberFormatter, A formatter that converts between numeric values and their textual representations.
+
+## Code
+
+```
+import Foundation
+
+let formatter = NumberFormatter()
+formatter.string(from: 30)
+```
+
+Simple right? I'm kidding, it's obviously not enough.
+
+But here is the basic structure of the formatter
+
+## Tuning
+
+Formatter come with many parameter.
+
+For exemple if you want their textual representations of the number use the numberStyle property
+
+```
+let formatter = NumberFormatter()
+formatter.numberStyle = .spellOut
+formatter.string(from: 30)
+
+// Output : Trentre
+```
+
+But you can get the currency value of this number
+
+```
+let formatter = NumberFormatter()
+formatter.numberStyle = .currency
+formatter.string(from: 30)
+// Output : 30,00€
+```
+
+## Fine Tuning
+
+In the previous examples we got results in French. My native language.
+
+But we can ask the format to use another locale
+
+```
+import Foundation
+
+let formatter = NumberFormatter()
+formatter.locale = Locale(identifier: "us_US")
+formatter.numberStyle = .currency
+formatter.string(from: 30)
+
+// Output : $ 30.00
+```
+
+## Bonus
+
+Many people have trouble reading numbers: dyscalculia
+You can help with people with this simple trick
+
+```
+import Foundation
+
+let formatter = NumberFormatter()
+formatter.numberStyle = .currency
+formatter.groupingSize = 3
+formatter.string(from: 30000)
+
+// Output: 30 000,00€
+```
+
+Simple!
+
+## And now ?
+
+As you have seen this formatter brings a lot of logic in relation to the user's locale, its monetary representation, but also its grammatical form.
+
+Don't code any more house stuff, use this formatter :)
+
+### Before leaving?
+
+In a next article I will talk about another component provided by default about progress :)
