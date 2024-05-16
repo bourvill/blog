@@ -192,6 +192,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"KMM-une-nieme-chimere.mdx": {
+	id: "KMM-une-nieme-chimere.mdx";
+  slug: "kmm-une-nieme-chimere";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "convert-in-to-her-string-literal-representation.mdx": {
 	id: "convert-in-to-her-string-literal-representation.mdx";
   slug: "convert-in-to-her-string-literal-representation";
