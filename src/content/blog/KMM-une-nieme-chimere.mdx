@@ -1,0 +1,150 @@
+---
+heroImage: /src/assets/images/bg.jpg
+category: Posts
+description: Un retour sur KMP
+pubDate: 2024-05-14T22:00:00.000Z
+draft: false
+tags:
+  - kmp
+  - kotlin
+  - swift
+  - kmm
+title: KMP une énième chimére?
+---
+
+Après 2 ans de pratique de KMM/KMP, j'avais envie de faire un debrief de cette énièmes chimères multiplateformes.
+
+Je parlerai seulement du vécu de mon côté iOS. Surement que certaines choses sont liés à des erreurs d'implémentation / utilisation dans nos projets, même si certains éléments ne sont pas objectif, ils sont tout de même le ressenti et la perception que j'en ai et que d'autres pourraient avoir dans son utilisation.
+
+# Notre implémentation, histoire de deux projets
+
+## Premier projet.
+
+Le premier projet est le projet de démarrage avec cette techno, le code kotlin est généré en xcframework puis il est importé dans le projet iOS.
+
+Nous avons du trouver et organiser l’équipe afin de commencer à collaborer ensemble autour d’un code commun.
+
+La version Android et iOS native est gérée aujourd’hui par deux équipes avec des mindsets et prérequis technique complètement différents.
+
+On se retrouve donc dans un premier temps avec un nouveau repository KMM où il faut réussir à harmoniser les façons de faire et aussi de réussir à comprendre le code Kotlin quand tu es toi développeur Swift.
+
+### Les premières difficultés
+
+Nous voilà donc à relire des PR Kotlin. Je pratique plusieurs langages de programmation, JS, TypeScript, PHP, j'ai regardé du côté de Go et Rust.
+
+Kotlin ça me pique les yeux, ok ce n'est pas objectif comme argument, mais c'est quand même à prendre en compte dans le choix de la techno: **vos devs sont ils prêts et ont ils envie d'apprendre un autre langage ?**
+
+Nos approches sont totalement différentes, nous aimons les computed properties pour des valeurs simples, coté android écrire des methods. Il faut donc trouver un premier juste milieu et gérer la frustration de chacun sur la façon de faire. Ceci est un exemple, mais voilà le genre d'arbitrage à faire, et quand ce n'est pas votre langage de prédilection, vous êtes très vite à court d'argument sur la façon de faire.
+
+Cet argument reste bien entendu un élèment propre aux membres de votre équipe, mais il est à prendre en compte si vous voulez migrer vers KMM car vous allez faire travailler deux équipes sur du code commun et qui auront probablement deux mindset different.
+
+### Plaisir d'offrir, joie de recevoir
+
+KMM dans son ensemble tente de mapper du Kotlin vers un équivalent Obj-c (plaisir d'offrir). 
+
+Malgré tout on se retrouve par moments à travailler avec des types du genre KotlinInt, KotlinBool et autres Kotlin \[...]. (joie de recevoir)
+
+Le problème est que quand vous avez un lot d'extension swift afin de simplifier votre code sur la gestion des Int, String, Bool par exemple. Vous vous retrouver à devoir mapper des extensions afin de faire passe plat entre votre code et le code KMM afin de garder vos mécaniques déjà en place.
+
+```swift
+extension KotlinInt {
+  var toInt: Int {
+    Int(truncating: self)
+  }
+  var toInt32: Int32 {
+    toInt.toInt32
+  }
+}
+
+extension Int32 {
+  var toInt32: Int32 {
+    Int32(self)
+  }
+}
+
+extension Int {
+  var toKotlinInt: KotlinInt {
+    KotlinInt(int: toInt32)
+  }
+}
+```
+
+### La première jambe de bois
+
+Les enum n'existe pas. Il faut passer par des companion ([https://kotlinlang.org/docs/object-declarations.html#companion-objects](https://kotlinlang.org/docs/object-declarations.html#companion-objects "companion")) pour arriver à certains résultat.
+
+Votre enum CaseIterable? Nop vous devez écrire un companion qui vous map vos case. Un comportement different de langage qui vous ampute de fonctionnalité clé de votre langage favoris.
+
+Vient donc le choix d'installer une dépendance à [SKIE](https://skie.touchlab.co/ "https://skie.touchlab.co/"). Un outil permettant d'avoir enfin un mapping des Kotlin sealed class vers un enum swift. Il permet et facilite aussi la gestion d'autres soucis, la doc explique plutot bien les mapping que SKIE apporte.
+
+On met donc en place une jambe de bois afin de palier au manque du premier framework. On commence donc à mettre des dépendances à d'autres projet, suivis de version, bug, monté de version... KMM évoluant assez vite, SKIE le doit donc aussi.
+
+KMM fait la promesse d'un meilleur support de swift dans ses prochaines versions avec directement un mapping vers swift. On verra bien...
+
+En tout état de cause, on se retrouve à mettre en place une liaison vers une library qui sera maintenue par qui, pendant combien de temps et à quel prix ? Si demain KMM porte complètement Swift, nous aurions donc intérêt à supprimer SKIE, mais pour quel effet de bord, sachant que votre code repose sur cette jambe de bois ?
+
+### La gestion catastrophique des erreurs
+
+Aujourd’hui, dans KMM, la gestion des erreurs (throws) est une annotation non obligatoire. Vous pouvez donc avoir un code qui throw une erreur sans jamais le savoir dans la version XCframework utilisé sur iOS. Vous avez donc…. un crash !
+
+Arrive donc une longue bataille pour faire comprendre ce prérequis technique pour avoir du code safe de notre côté. (Pourquoi écrire du code que je n’ai pas besoin moi sur ma plateforme Android pour toi iOS ? )
+
+Nous avons également essayé via les StateResult et là, c'est le drame, puisque nous sommes de notre côté sur iOS obligés de downcast les objets
+
+### Les crashs
+
+Et bien, le triste constat est simple, la majorité des crashs sont via KMM. Alors oui, c'est sûrement notre implémentation... mais encore une fois, ça me fout la rage de crash pour une techno que je ne maîtrise pas dans mon projet.
+
+## Le deuxième projet
+
+Ce projet est lancé avec le bootstrap d'un projet KMP. La version KMP est donc "injectée" directement via des build script et  build setting. Nous travaillons donc dans un giga projet git qui inclue, la version iOS, la version Android, (il y avait aussi flutter RIP) et KMM.
+
+On perd l'auto-complétion dans la bataille de la partie KMM avec ce projet ? ! (Pourquoi? Ça restera un mystère)
+
+On va être honnête Xcode n'aide pas pour tout ça, et nous avons aussi peut être un souci dans notre projet.
+
+Sauf que personne ne maîtrise le sujet, et ne sait pourquoi on a le souci et c'est le dernier des soucis du run de l'autre équipe puisqu'ils ne sont pas impactés. On se retrouve à mettre une jambe de bois dans le build setting en trouvant une personne qui a aussi le même souci sur un forum Kotlin. (ouf sauvé) -- \*Ah! si tu penses que c'est pas unsoucis de travailler sans auto-complétion 2 semaine, fait lexpérience  ;) \*
+
+### La gestion catastrophique des erreurs !!! (bis)
+
+Dans ce format la gestion des erreurs est pire, non pas dans le code et son utilisation puisque nous avions appris de nos erreurs du passé. Mais simplement que vous pouvez compiler, build success, mais le code KMM n'a pas été compilé. (La faute au fix de l'autocomplétion ?)
+
+### Code partagé, monté de version partagé
+
+La team android se retrouve à avoir besoin de faire une montée de version de Kotlin, jusque là rien d'anormal. Nous faisons la même chose avec swift.
+
+Sauf que pour le développeur iOS, vous vous retrouvez donc à chercher pourquoi la version.konan-\*\*\*\* est manquante (CF la gestion des erreurs juste avant).
+
+Vous faites donc une montée de version d'android studio, gradle, puis à prier pour que ça marche. Sur deux montées de version, nous avons dû à la main exécuter le wget pour aller télécharger la bonne version de kotlin et la mettre dans le répertoire.konan.
+
+### Swift structured concurrency
+
+Nous avons choisi pour ce projet iOS de monter le niveau et d'activer directement le level "complete" afin de nous préparer au futur de Swift et de gérer pour le mieux notre concurrency. Et bien KMM vous oubliez ! Le portage étant des class, non final et encore moins Sendable vous pouvez saucer tout votre code de @preconcurrency import sur kmm
+
+### Un problème de taille
+
+Aujourd'hui KMM souffre d'un problème de taille, avec son seul avantage sur le fait de partager du code métier, vous embarquez un framework une fois compilé pour nous pèse 100 Mo. C'est colossale ! Vous imaginiez faire un app clip et partager votre code KMM ? Finito! AppClips  -> ios15 10Mo, ios16 15Mo, ios17 50Mo 
+
+Il faut comprendre que vous compiler un binary qui sera exposé, il inclue donc tous les besoins pour KMM de fonctionner. Vous voulez splitter votre KMM par domain? Vous créez donc un nombre de binary ayant chacun leurs besoins autonomes pour faire fonctionner seul pour leur domain. Vous importez donc x fois les coroutines par exemple.
+
+# Conclusion
+
+Pour moi KMP rate la promesse du mirage multiplatform, puisque dans ce cas, nous nous retrouvons avec 1 code commun et une implémentation pour chaque OS, et que si vos teams ne font pas l'effort de vouloir corriger les soucis via le code commun quand cela est possible, vous vous retrouvez au fur et à mesure avec un code et une implémentation divergentes dans le temps.
+
+KMM demande un effort considérable pour les équipes de chaque OS de prendre part à la façon de faire de l'autre OS. On connaît le rush des projets... -> tu me feras ça pour hier et OP c'est un quickfix poussé en direct sans le code commun.
+
+Le nouveau KMP compose a pour objectif de venir gérer aussi en commun la partie UI, et voilà le florilège d'installations de dépendance "\*Cupertino" arriver...
+
+Google venant de tuer (?!) flutter et misant maintenant sur KMP, quelle sera la durée de vie de cette techno une fois la hype passée ?
+
+KMM coche toutes les cases du fameux wahou trop bien du multiplateforme, non mais tu verras cette fois c'est trop bien... comme Flutter, ionic, cordova blablabla
+
+Je n'arrive pas à comprendre cette obsession que les autres développeur ont de vouloir absolument foutre un mouton à 5 pattes sur iOS pour ne simplement ne pas faire du natif, quand on voit maintenant les capacités de SwiftUI. Pourquoi vouloir absolument se rendre dépendant d'un framework/environnement tiers quant finalement Apple passe son temps à optimiser et améliorer l'outil qu'il vous donne...
+
+## Le roi est mort? Vive le roi!
+
+Tout comme cordova, ionic, flutter et autres frameworks maintenant hasbeen. Pourquoi KMM serait mieux que finalement les autres ? Pourquoi ne voit on pas tout de suite les défauts de cette chimère ?
+
+Si les autres étaient si bien, pourquoi ils sont maintenant boudés et abandonnés pour un nouveau truc hype à la mode ?
+
+Le prochain mirage ? WASM? next hype incoming!
