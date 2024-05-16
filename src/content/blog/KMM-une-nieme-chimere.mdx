@@ -121,6 +121,12 @@ Vous faites donc une montée de version d'android studio, gradle, puis à prier 
 
 Nous avons choisi pour ce projet iOS de monter le niveau et d'activer directement le level "complete" afin de nous préparer au futur de Swift et de gérer pour le mieux notre concurrency. Et bien KMM vous oubliez ! Le portage étant des class, non final et encore moins Sendable vous pouvez saucer tout votre code de @preconcurrency import sur kmm
 
+### Un problème de taille
+
+Aujourd'hui KMM souffre d'un problème de taille, avec son seul avantage sur le fait de partager du code métier, vous embarquez un framework une fois compilé pour nous pèse 100 Mo. C'est colossale ! Vous imaginiez faire un app clip et partager votre code KMM ? Finito! AppClips  -> ios15 10Mo, ios16 15Mo, ios17 50Mo 
+
+Il faut comprendre que vous compiler un binary qui sera exposé, il inclue donc tous les besoins pour KMM de fonctionner. Vous voulez splitter votre KMM par domain? Vous créez donc un nombre de binary ayant chacun leurs besoins autonomes pour faire fonctionner seul pour leur domain. Vous importez donc x fois les coroutines par exemple.
+
 # Conclusion
 
 Pour moi KMP rate la promesse du mirage multiplatform, puisque dans ce cas, nous nous retrouvons avec 1 code commun et une implémentation pour chaque OS, et que si vos teams ne font pas l'effort de vouloir corriger les soucis via le code commun quand cela est possible, vous vous retrouvez au fur et à mesure avec un code et une implémentation divergentes dans le temps.
