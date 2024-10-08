@@ -97,7 +97,7 @@ Et bien, le triste constat est simple, la majorité des crashs sont via KMM. Alo
 
 ## Le deuxième projet
 
-Ce projet est lancé avec le bootstrap d'un projet KMP. La version KMP est donc "injectée" directement via des build script et  build setting. Nous travaillons donc dans un giga projet git qui inclue, la version iOS, la version Android, (il y avait aussi flutter RIP) et KMM.
+Ce projet est lancé avec le bootstrap d'un projet KMP. La version KMP est donc "injectée" directement via des build script et build setting. Nous travaillons donc dans un giga projet git qui inclue, la version iOS, la version Android, (il y avait aussi flutter RIP) et KMM.
 
 On perd l'auto-complétion dans la bataille de la partie KMM avec ce projet ? ! (Pourquoi? Ça restera un mystère)
 
@@ -123,7 +123,7 @@ Nous avons choisi pour ce projet iOS de monter le niveau et d'activer directemen
 
 ### Un problème de taille
 
-Aujourd'hui, KMM souffre d'un problème de taille, avec son seul avantage sur le fait de partager du code métier, vous embarquez un framework une fois compilé pour nous qui pèse 100 Mo. C'est colossal ! Vous imaginiez faire un app clip et partager votre code KMM ? Finito! AppClips  -> ios15 10Mo, ios16 15Mo, ios17 50Mo
+Aujourd'hui, KMM souffre d'un problème de taille, avec son seul avantage sur le fait de partager du code métier, vous embarquez un framework une fois compilé pour nous qui pèse 100 Mo. C'est colossal ! Vous imaginiez faire un app clip et partager votre code KMM ? Finito! AppClips -> ios15 10Mo, ios16 15Mo, ios17 50Mo
 
 Il faut comprendre que vous compiler un binary qui sera exposé, il inclue donc tous les besoins pour KMM de fonctionner. Vous voulez splitter votre KMM par domain? Vous créez donc un nombre de binary ayant chacun leurs besoins autonomes pour faire fonctionner seul pour leur domain. Vous importez donc x fois les coroutines par exemple.
 

@@ -1,0 +1,83 @@
+---
+import ListCategories from '@/components/ListCategories'
+import TitlePage from '@/components/TitlePage'
+import BaseLayout from '@/layouts/BaseLayout'
+import { apps } from '@/data/app'
+import { exppros } from '@/data/expPro'
+---
+
+<BaseLayout title='Home'>
+	<TitlePage title='Bourvill<Blog>' />
+	<ListCategories />
+
+	<div>
+		<h2 class='text-lg font-medium tracking-wide text-end'>Mon CV</h2>
+		<h3 class='text-lg font-bold pb-4'>Développeur iOS (ex PHP Symfony 2/Api-platform)</h3>
+		<div>
+			Je suis passionné de nouvelles technologies et exigeant tant sur les techniques de
+			programmation que sur l’utilisation des bonnes pratiques.
+			<br />
+			Grâce aux fortes compétences techniques acquises par la pratique dans la réalisation d’applications
+			en PHP avec le framework Symfony, je suis capable de mener un projet de sa conception à sa mise
+			en production.
+			<br />
+			Du point de vue de la méthodologie, je suis un praticien des démarches agiles, habitué à planifier
+			le travail en cycles de développement de 1 à 2 semaines.
+			<br />
+			Je contribue également à un projet Open source nommé Wallabag, je m’occupe de l’application iOS.
+			<br />
+			J’utilise une partie de mon temps libre pour développer des applications iOS et Web à titre personnel
+			afin de capitaliser sur de nouveaux concepts et me tenir informé des nouvelles technologies.
+		</div>
+
+		<h3 class='text-lg font-bold py-4'>Technologies</h3>
+		<div>
+			Réalisation d'application native iOS en utilisant Swift, SwiftUI.<br />
+			Réalisation de site en PHP7, POO, Symfony, Api Platform <br />
+			Versionning : Git Bonne maitrise serveur et env <br />
+			Cloud :AWS, GCP, Debian, Ubuntu, Kubernetes<br />
+			Autres outils : Docker, Caspitrano, Puppet, Ansible
+		</div>
+		<h3 class='text-lg font-bold py-4'>Expériences</h3>
+		<h4 class='text-lg font-semibold'>Projet Perso</h4>
+		{
+			apps.map((app) => (
+				<div>
+					<a href={app.link}>
+						<b>{app.name}</b> - {app.description}
+					</a>
+				</div>
+			))
+		}
+
+		{
+			exppros.map((exp) => (
+				<div>
+					<h3 class='text-lg font-semibold'>{exp.enterprise}</h3>
+					<div>
+						<b>Techno:</b> {exp.tech}
+						<p>{exp.description}</p>
+					</div>
+				</div>
+			))
+		}
+	</div>
+</BaseLayout>
+
+<script>
+	import { animate } from 'motion'
+	const showAnimations = localStorage.getItem('animations') === 'true'
+
+	if (showAnimations) {
+		animate(
+			'.title',
+			{ y: [80, 0], opacity: [0, 1] },
+			{
+				duration: 2.5,
+				opacity: { duration: 3 },
+
+				offset: [0, 0.55, 0.75]
+			}
+		)
+	}
+</script>

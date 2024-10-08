@@ -14,6 +14,6 @@ export const siteConfig: SiteConfig = {
 	description: 'Un simple blog pour parler de geekeries',
 	lang: 'fr-FR',
 	ogLocale: 'fr_FR',
-	shareMessage: 'Share this post', 
+	shareMessage: 'Share this post',
 	paginationSize: 6
 }
