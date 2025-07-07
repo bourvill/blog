@@ -32,13 +32,13 @@
 		"pre-commit": "lint-staged"
 	},
 	"dependencies": {
-		"@astrojs/rss": "^4.0.11",
-		"astro": "^5.7.13",
+		"@astrojs/rss": "^4.0.12",
+		"astro": "^5.11.0",
 		"astro-font": "^0.0.72"
 	},
 	"devDependencies": {
-		"@astrojs/mdx": "^4.2.6",
-		"@astrojs/sitemap": "^3.4.0",
+		"@astrojs/mdx": "^4.3.0",
+		"@astrojs/sitemap": "^3.4.1",
 		"@astrojs/tailwind": "^6.0.2",
 		"@pagefind/default-ui": "^1.0.4",
 		"@tailwindcss/typography": "0.5.10",
