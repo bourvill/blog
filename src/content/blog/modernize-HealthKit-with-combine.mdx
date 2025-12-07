@@ -18,12 +18,12 @@ Many healthkit methods use a completion model. We will modernize it using the ne
 First write the default requirement code
 
 ```swift
-// retrive HealthStore
+// retrieve HealthStore
 let store = HKHealthStore()
 // choose data you want in this example we want coffee
 let samplesType: Set<HKSampleType> = [HKObjectType.quantityType(forIdentifier: .dietaryCaffeine)!]
 
-//Healtkit is only available on iOS and WatchOS
+//HealthKit is only available on iOS and WatchOS
 guard HKHealthStore.isHealthDataAvailable() else {
     fatalError()
 }

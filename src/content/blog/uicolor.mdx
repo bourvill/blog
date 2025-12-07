@@ -9,7 +9,7 @@ tags: [swift]
 
 # UIColor : Quick tips and color your Life!
 
-Before start, we need to create an extension, it’s simple.
+Before starting, we need to create an extension, it’s simple.
 Create a new file with this:
 
 ```
@@ -19,7 +19,7 @@ extension UIColor {
 
 ## UIColor with Int for RGB color
 
-Now we can create an initializer for UIColor and to be able to handle Int value
+Now we can create an initializer for UIColor to be able to handle an Int value
 
 ```swift
 extension UIColor {
@@ -38,11 +38,11 @@ _Convenience initializers are also aptly named, and they are initializers used t
 _Designated initializers tend to set all of the properties up and let the user send in values for each. A convenience initializer often has some of those hard coded, and thus can take less parameters._
 _The developer usually write’s a convenience initializer to set some defaults that are appropriate to a special use case._
 
-And we use a “_assert_” keyword
+And we use the “_assert_” keyword
 _Assert is first shot I came along for asserts._
 _As expected, assert() is evaluated only in debug mode (this is the general rule for asserts in programming languages)._
 
-Now you can use in your code like this:
+Now you can use it in your code like this:
 
 ```swift
 let color = UIColor(red: 100, green: 50, blue: 50)
@@ -50,7 +50,7 @@ let color = UIColor(red: 100, green: 50, blue: 50)
 
 ## UIColor from hex
 
-Now add an initializer for UIColor and to be able to handle Hexa value
+Now add an initializer for UIColor to be able to handle Hexa value
 
 ```swift
 extension UIColor {
@@ -60,7 +60,7 @@ extension UIColor {
 }
 ```
 
-and use like this:
+and use it like this:
 
 ```swift
 let red = UIColor(hex: 0xFF0000)

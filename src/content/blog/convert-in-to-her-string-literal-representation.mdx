@@ -1,19 +1,19 @@
 ---
 heroImage: ../../assets/images/Swift_logo_horz_lockup_color_rgb.svg
 category: Posts
-description: Convert int to her string literal representation
+description: Convert int to its string literal representation
 pubDate: 2020-06-24T20:11:00.000Z
 draft: false
 tags:
   - swift
-title: Convert int to her string literal representation
+title: Convert int to its string literal representation
 ---
 
 # Convert int to her string literal representation
 
 ## NumberFormatter
 
-Swift come with many formatter, we can found DateFormatter, LengthFormatter, EnergyFormatter.
+Swift comes with many formatters, we can find DateFormatter, LengthFormatter, EnergyFormatter.
 
 Today I will introduce NumberFormatter, A formatter that converts between numeric values and their textual representations.
 
@@ -32,16 +32,16 @@ But here is the basic structure of the formatter
 
 ## Tuning
 
-Formatter come with many parameter.
+Formatters come with many parameters.
 
-For exemple if you want their textual representations of the number use the numberStyle property
+For example if you want their textual representations of the number use the numberStyle property
 
 ```
 let formatter = NumberFormatter()
 formatter.numberStyle = .spellOut
 formatter.string(from: 30)
 
-// Output : Trentre
+// Output : Trente
 ```
 
 But you can get the currency value of this number
@@ -73,7 +73,7 @@ formatter.string(from: 30)
 ## Bonus
 
 Many people have trouble reading numbers: dyscalculia
-You can help with people with this simple trick
+You can help people with this simple trick
 
 ```
 import Foundation

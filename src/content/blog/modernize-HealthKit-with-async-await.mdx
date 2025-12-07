@@ -26,7 +26,7 @@ let store = HKHealthStore()
 // choose data you want in this example we want Caffeine
 let samplesType: Set<HKSampleType> = [HKObjectType.quantityType(forIdentifier: .dietaryCaffeine)!]
 
-//Healtkit is only available on iOS and WatchOS
+//HealthKit is only available on iOS and WatchOS
 guard HKHealthStore.isHealthDataAvailable() else {
  fatalError()
 }
